@@ -1,19 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';  // Add provider package
+import 'package:provider/provider.dart';
+
 import 'firebase_options.dart';
-import 'app.dart';
-import 'providers/note_provider.dart'; // Import your NotesProvider
+import 'providers/note_provider.dart';
+import 'providers/auth_provider.dart';
+import 'screens/login_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => NotesProvider()..loadNotes(), // Load notes immediately
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => NotesProvider()),
+      ],
       child: MyApp(),
     ),
   );
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false, // ✅ removes the debug banner
+      title: 'Note Taker App',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: AuthWrapper(),
+    );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+    return authProvider.user == null ? LoginScreen() : HomeScreen();
+  }
 }
