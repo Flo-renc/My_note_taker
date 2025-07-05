@@ -67,21 +67,21 @@ class _NoteDialogState extends State<NoteDialog> {
         autofocus: true,
         maxLines: 5,
         enabled: !_isLoading,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Enter your note here',
           border: OutlineInputBorder(),
         ),
       ),
       actions: [
         if (_isLoading)
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: CircularProgressIndicator(),
           )
         else ...[
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: _saveNote,

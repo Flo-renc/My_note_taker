@@ -6,6 +6,8 @@ import 'home_screen.dart';
 import '../core/utils/snackbar.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -31,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => HomeScreen()),
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
     }
   }
@@ -39,37 +41,37 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Log In')),
+      appBar: AppBar(title: const Text('Log In')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
             const SizedBox(height: 16),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
             const SizedBox(height: 24),
             _isLoading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: _login,
-                    child: Text('Log In'),
+                    child: const Text('Log In'),
                   ),
             const SizedBox(height: 12),
             TextButton(
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (_) => SignupScreen()),
+                  MaterialPageRoute(builder: (_) => const SignupScreen()),
                 );
               },
-              child: Text('Don’t have an account? Sign up'),
+              child: const Text('Don’t have an account? Sign up'),
             )
           ],
         ),

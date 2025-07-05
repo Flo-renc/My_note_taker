@@ -6,6 +6,8 @@ import '../core/utils/snackbar.dart';
 import 'note_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -72,15 +74,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Notes'),
+        title: const Text('My Notes'),
         actions: [
-          IconButton(onPressed: _logout, icon: Icon(Icons.logout)),
+          IconButton(onPressed: _logout, icon: const Icon(Icons.logout)),
         ],
       ),
       body: _isLoadingInitial
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : notes.isEmpty
-              ? Center(
+              ? const Center(
                   child: Text(
                     'Nothing here yet—tap ➕ to add a note.',
                     style: TextStyle(fontSize: 16),
@@ -96,13 +98,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
-                            icon: Icon(Icons.edit, color: Colors.blue),
+                            icon: const Icon(Icons.edit, color: Colors.blue),
                             onPressed: _isProcessing
                                 ? null
                                 : () => _openNoteDialog(id: note.id, existingText: note.text),
                           ),
                           IconButton(
-                            icon: Icon(Icons.delete, color: Colors.red),
+                            icon: const Icon(Icons.delete, color: Colors.red),
                             onPressed: _isProcessing
                                 ? null
                                 : () => _deleteNote(note.id),
@@ -115,8 +117,8 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: _isProcessing ? null : () => _openNoteDialog(),
         child: _isProcessing
-            ? CircularProgressIndicator(color: Colors.white)
-            : Icon(Icons.add),
+            ? const CircularProgressIndicator(color: Colors.white)
+            : const Icon(Icons.add),
       ),
     );
   }

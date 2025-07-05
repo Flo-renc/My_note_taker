@@ -20,27 +20,31 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => NotesProvider()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // ✅ removes the debug banner
       title: 'Note Taker App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: AuthWrapper(),
+      home: const AuthWrapper(),
     );
   }
 }
 
 class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
-    return authProvider.user == null ? LoginScreen() : HomeScreen();
+    return authProvider.user == null ? const LoginScreen() : const HomeScreen();
   }
 }

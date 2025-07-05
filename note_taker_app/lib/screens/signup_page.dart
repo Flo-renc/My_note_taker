@@ -6,6 +6,8 @@ import 'home_screen.dart';
 import '../core/utils/snackbar.dart';
 
 class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
+
   @override
   State<SignupScreen> createState() => _SignupScreenState();
 }
@@ -31,7 +33,7 @@ class _SignupScreenState extends State<SignupScreen> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => HomeScreen()),
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
     }
   }
@@ -39,37 +41,37 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sign Up')),
+      appBar: AppBar(title: const Text('Sign Up')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
             const SizedBox(height: 16),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
             const SizedBox(height: 24),
             _isLoading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: _signup,
-                    child: Text('Sign Up'),
+                    child: const Text('Sign Up'),
                   ),
             const SizedBox(height: 12),
             TextButton(
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (_) => LoginScreen()),
+                  MaterialPageRoute(builder: (_) => const LoginScreen()),
                 );
               },
-              child: Text('Already have an account? Log in'),
+              child: const Text('Already have an account? Log in'),
             )
           ],
         ),

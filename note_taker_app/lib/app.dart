@@ -18,20 +18,22 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Note App',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: AuthWrapper(),
+        home: const AuthWrapper(),
       ),
     );
   }
 }
 
 class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
     if (authProvider.user == null) {
-      return LoginScreen();
+      return const LoginScreen();
     } else {
-      return HomeScreen();
+      return const HomeScreen();
     }
   }
 }
