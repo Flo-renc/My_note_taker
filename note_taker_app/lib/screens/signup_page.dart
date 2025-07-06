@@ -26,15 +26,22 @@ class _SignupScreenState extends State<SignupScreen> {
       _passwordController.text.trim(),
     );
 
+    if (!mounted) return;
+
     setState(() => _isLoading = false);
 
     if (error != null) {
       showSnackBar(context, error);
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-      );
+      
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const HomeScreen()),
+          );
+        }
+      });
     }
   }
 
