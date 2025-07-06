@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _isLoadingInitial = true;
-  bool _isProcessing = false; // for add/update/delete
+  bool _isProcessing = false;
 
   @override
   void initState() {
@@ -26,9 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final noteProvider = Provider.of<NotesProvider>(context, listen: false);
       await noteProvider.loadNotes();
+      if (!mounted) return;
     } catch (e) {
+      if (!mounted) return;
       showSnackBar(context, "Failed to load notes.");
     } finally {
+      // ignore: control_flow_in_finally
+      if (!mounted) return;
       setState(() {
         _isLoadingInitial = false;
       });
@@ -57,10 +61,14 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final noteProvider = Provider.of<NotesProvider>(context, listen: false);
       await noteProvider.deleteNote(id);
+      if (!mounted) return;
       showSnackBar(context, "Note deleted.");
     } catch (e) {
+      if (!mounted) return;
       showSnackBar(context, "Failed to delete note.");
     } finally {
+      // ignore: control_flow_in_finally
+      if (!mounted) return;
       setState(() {
         _isProcessing = false;
       });
@@ -101,7 +109,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             icon: const Icon(Icons.edit, color: Colors.blue),
                             onPressed: _isProcessing
                                 ? null
-                                : () => _openNoteDialog(id: note.id, existingText: note.text),
+                                : () => _openNoteDialog(
+                                      id: note.id,
+                                      existingText: note.text,
+                                    ),
                           ),
                           IconButton(
                             icon: const Icon(Icons.delete, color: Colors.red),
